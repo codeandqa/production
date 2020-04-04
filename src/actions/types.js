@@ -1,0 +1,9 @@
+// bundle beer action types into single object
+export const beerActionTypes = {
+  FETCH_BEERS: "FETCH_BEERS",
+  FETCHING_BEERS: "FETCHING_BEERS",
+  FETCH_MORE_BEERS: "FETCH_MORE_BEERS",
+  SEARCH_BEERS: "SEARCH_BEERS",
+  HANDLE_FAVOURITE_BEER: "HANDLE_FAVOURITE_BEER",
+  DISPLAY_BEER: "DISPLAY_BEER"
+};
