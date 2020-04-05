@@ -44,7 +44,7 @@ class Home extends Component {
           <div className="container">
             <div className="row">
               <div className="col">
-                <h1 className="font-weight-bold">The Beer Bank ver: 0.1.1</h1>
+                <h1 className="font-weight-bold">The Beer Bank ver: 0.1.3</h1>
                 <p>Find your favourite beer here</p>
               </div>
             </div>
