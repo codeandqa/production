@@ -7,7 +7,7 @@ IMAGE=react-web-app
 # ensure we're up to date
 git pull
 # bump version
-docker run --rm -v "$PWD":/app $USERNAME/react-web-app patch
+docker run --rm -v "$PWD":/app $USERNAME/react-web-app --input  "$version" patch
 version=`cat VERSION`
 echo "version: $version"
 # run build
