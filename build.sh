@@ -3,5 +3,5 @@ set -ex
 # docker hub username
 USERNAME=adityashahi
 # image name
-IMAGE=react-web-app
+IMAGE=myapp
 docker build -t $USERNAME/$IMAGE:latest .

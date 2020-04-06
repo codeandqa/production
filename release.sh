@@ -1,31 +1,18 @@
+#/bin/bash 
+############################################################################
+#   usage: ./release.sh <release_type> release_type: major, minor, patch   #    
+############################################################################
+
 set -ex
 # SET THE FOLLOWING VARIABLES
+
 # docker hub username
-# USERNAME=adityashahi
+USERNAME=adityashahi
 # # image name
-# IMAGE=react-web-app
-# # ensure we're up to date
-# git pull
-# # bump version
-# docker run --rm -v "$PWD":/app $USERNAME/react-web-app --input  "$version" patch
-# version=`cat VERSION`
-# echo "version: $version"
-# # run build
-# ./build.sh
-# # tag it
-# git add -A
-# git commit -m "version $version"
-# git tag -a "$version" -m "version $version"
-# git push
-# git push --tags
-# docker tag $USERNAME/$IMAGE:latest $USERNAME/$IMAGE:$version
-# # push it
-# docker push $USERNAME/$IMAGE:latest
-# docker push $USERNAME/$IMAGE:$version
+IMAGE=myapp
 
-#/bin/bash 
+#Read the VERSION file and generate new release versioion
 value=`cat VERSION`
-
 major="$(cut -d'.' -f1 <<<$value)"
 minor="$(cut -d'.' -f2 <<<$value)"
 patch="$(cut -d'.' -f3 <<<$value)"
@@ -45,13 +32,31 @@ then
    updated_version="$major.$minor.$new_patch"
 fi
 
-sed -i -e "s/$value/$updated_version/" VERSION
+echo "update the VERSION: $updated_version"
 
-GIT=`which git`
-git add VERSION
-git commit -m "version $updated_version"
-${GIT} tag -a "$updated_version" -m "version $updated_version"
-${GIT} push
-${GIT} push --tags
+#On docker hub, if you have autobuild set with tags, use followingling. 
+############################ Tag Release ############################
+
+# echo "Release tag $updated_version"
+# sed -i -e "s/$value/$updated_version/" VERSION
+# GIT=`which git`
+# ${GIT} add VERSION
+# ${GIT} commit -m "version $updated_version"
+# ${GIT} tag -a "$updated_version" -m "version $updated_version"
+# ${GIT} push
+# ${GIT} push --tags
+# echo "Completed release tag $updated_version"
+
+
+############################ Docker hub Push ############################
+
+# echo "start docker build with tag: latest."
+# docker build -t $USERNAME/$IMAGE:latest .
+# echo "Copy latest tag with $updated_version."
+# docker tag $USERNAME/$IMAGE:latest $USERNAME/$IMAGE:$updated_version
+
+# echo "Push latest and $updated_version to docker hub."
+# docker push $USERNAME/$IMAGE:latest
+# docker push $USERNAME/$IMAGE:$updated_version
 
 
