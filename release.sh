@@ -50,7 +50,7 @@ sed -i -e "s/$value/$updated_version/" VERSION
 GIT=`which git`
 git add VERSION
 git commit -m "version $updated_version"
-${GIT} tag -a "$updated_version" -m "version $version"
+${GIT} tag -a "$updated_version" -m "version $updated_version"
 ${GIT} push
 ${GIT} push --tags
 
